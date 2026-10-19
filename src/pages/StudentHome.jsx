@@ -1,25 +1,43 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
 import { useAuth } from '../auth.jsx'
-
-const ACTIONS = [
-  { title: 'Cuéntanos cómo estás', text: 'Un check-in corto y privado.', soon: true },
-  { title: 'Necesito ayuda', text: 'Reporta lo que te pasa o lo que viste.', soon: true },
-  { title: 'Quiero hablar con alguien', text: 'Escríbele a tu psicólogo o tutor.', soon: true },
-  { title: 'Mi mascota', text: 'Visítala cada semana.', soon: true }
-]
+import Mascot from '../components/Mascot.jsx'
 
 export default function StudentHome() {
-  const { profile, signOut } = useAuth()
+  const { profile, session, signOut } = useAuth()
+  const nav = useNavigate()
+  const [days, setDays] = useState(null)
+
+  useEffect(() => {
+    supabase.from('checkins').select('created_at').eq('student_id', session.user.id)
+      .order('created_at', { ascending: false }).limit(1)
+      .then(({ data }) => setDays(data?.length ? Math.floor((Date.now() - new Date(data[0].created_at)) / 864e5) : 99))
+  }, [session])
+
+  const mood = days === null || days <= 7 ? 'happy' : days <= 14 ? 'neutral' : 'sad'
+  const msg = { happy: 'Qué bueno verte. ¿Cómo va tu semana?', neutral: 'Te extrañé. Cuéntame cómo estás.', sad: 'Hace tiempo que no nos vemos. Aquí sigo.' }[mood]
+
   return (
     <main className="page">
-      <h1>Hola, {profile.full_name?.split(' ')[0]}</h1>
-      <div className="grid">
-        {ACTIONS.map((a) => (
-          <button key={a.title} className="card" disabled={a.soon}>
-            <strong>{a.title}</strong>
-            <span>{a.text}</span>
-            {a.soon && <em>Próximamente</em>}
-          </button>
-        ))}
+      <section className="hero">
+        <Mascot mood={mood} />
+        <div>
+          <h1>Hola, {profile.full_name?.split(' ')[0]}</h1>
+          <p>{msg}</p>
+        </div>
+      </section>
+      <div className="tiles">
+        <button className="tile" onClick={() => nav('/checkin')}>
+          <span className="ico">💛</span><strong>¿Cómo estás?</strong><span>Un check-in corto y privado</span>
+        </button>
+        <button className="tile help" onClick={() => nav('/ayuda')}>
+          <span className="ico">✋</span><strong>Necesito ayuda</strong><span>Cuéntanos qué pasó</span>
+        </button>
+        <button className="tile chat wide" onClick={() => nav('/chat')}>
+          <span className="ico">💬</span>
+          <div><strong>Hablar con alguien</strong><br /><span>Escríbele a tu psicólogo o tutor</span></div>
+        </button>
       </div>
       <button className="link" onClick={signOut}>Cerrar sesión</button>
     </main>

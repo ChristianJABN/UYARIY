@@ -23,6 +23,9 @@ Sube a GitHub, importa el repositorio en vercel.com y agrega las dos variables d
 ## 4. Íconos de la PWA
 Agrega `icon-192.png` e `icon-512.png` en `/public`.
 
+## Módulo 2
+Ejecuta `supabase/migration_02.sql` en el SQL Editor (crea el bucket `evidencias` y el escalado de casos).
+
 ## Estado
-Listo: login código + PIN, consentimiento, perfiles, salida rápida, panel base, esquema con RLS.
-Siguiente: check-in, alerta con evidencias, dashboard con gráficos, chat, seguimiento, mascota.
+Listo: login, consentimiento, check-in, alerta con evidencias, seguimiento, chat, mascota y panel con resumen, casos y mensajes.
+Siguiente: recordatorios, consentimiento de padres, más gráficos.

@@ -17,14 +17,16 @@ export default function Login() {
 
   return (
     <main className="page narrow">
-      <h1 className="brand">UYARIY</h1>
-      <p className="lead">Aquí te escuchamos.</p>
+      <h1 className="sr">UYARIY</h1>
+      <img className="logo" src="/logo.png" alt="UYARIY, yo te escucho" />
+      <p className="lead">Entra con tu código y tu PIN.</p>
       <label>Código de estudiante
         <input value={code} onChange={(e) => setCode(e.target.value)} autoComplete="username" />
       </label>
       <label>PIN
         <input type="password" inputMode="numeric" value={pin}
-          onChange={(e) => setPin(e.target.value)} autoComplete="current-password" />
+          onChange={(e) => setPin(e.target.value)} autoComplete="current-password"
+          onKeyDown={(e) => e.key === 'Enter' && code && pin && submit()} />
       </label>
       {error && <p className="error" role="alert">{error}</p>}
       <button className="btn" onClick={submit} disabled={busy || !code || !pin}>

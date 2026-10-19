@@ -3,6 +3,9 @@ import { useAuth } from './auth.jsx'
 import Login from './pages/Login.jsx'
 import Consent from './pages/Consent.jsx'
 import StudentHome from './pages/StudentHome.jsx'
+import CheckIn from './pages/CheckIn.jsx'
+import Help from './pages/Help.jsx'
+import Chat from './pages/Chat.jsx'
 import StaffHome from './pages/StaffHome.jsx'
 import Neutral from './pages/Neutral.jsx'
 import QuickExit from './components/QuickExit.jsx'
@@ -11,7 +14,6 @@ export default function App() {
   const { session, profile, consented, loading } = useAuth()
   if (loading) return <p className="center">Cargando…</p>
 
-  // Ruta pública: pantalla neutra de la salida rápida
   if (!session) {
     return (
       <Routes>
@@ -23,12 +25,22 @@ export default function App() {
   if (!profile) return <p className="center">Tu cuenta aún no tiene perfil. Avisa a tu colegio.</p>
   if (!consented) return <Consent />
 
-  const Home = profile.role === 'staff' ? StaffHome : StudentHome
+  if (profile.role === 'staff') {
+    return (
+      <Routes>
+        <Route path="/" element={<StaffHome />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    )
+  }
   return (
     <>
-      {profile.role === 'student' && <QuickExit />}
+      <QuickExit />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<StudentHome />} />
+        <Route path="/checkin" element={<CheckIn />} />
+        <Route path="/ayuda" element={<Help />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/tareas" element={<Neutral />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
