@@ -86,3 +86,12 @@ textarea { min-height: 90px; resize: vertical; }
 
 .quick-exit { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 14px); right: 14px; z-index: 20; padding: 9px 18px; font: inherit; font-weight: 900; color: #fff; background: #e0443e; border: 3px solid var(--ink); border-radius: 999px; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Módulo 3 */
+.gradebar { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 12px; margin: 0 -2px 6px; }
+.gradebar .chip { white-space: nowrap; flex: none; }
+.btn.red { background: #e0443e; color: #fff; }
+.pill { display: inline-block; padding: 2px 12px; font-size: .85rem; font-weight: 900; border: 2px solid var(--ink); border-radius: 99px; background: var(--sun-soft); }
+.note { color: var(--grey); font-weight: 700; font-size: .92rem; }
+.goto { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.goto .chip { text-align: left; border-radius: 16px; }

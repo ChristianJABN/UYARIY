@@ -29,14 +29,16 @@ export default function StudentHome() {
       </section>
       <div className="tiles">
         <button className="tile" onClick={() => nav('/checkin')}>
-          <span className="ico">💛</span><strong>¿Cómo estás?</strong><span>Un check-in corto y privado</span>
+          <span className="ico">💛</span><strong>Realizar diagnóstico</strong><span>Una evaluación corta y privada</span>
         </button>
         <button className="tile help" onClick={() => nav('/ayuda')}>
-          <span className="ico">✋</span><strong>Necesito ayuda</strong><span>Cuéntanos qué pasó</span>
+          <span className="ico">✋</span><strong>Reportar caso</strong><span>Cuéntanos qué pasó</span>
         </button>
-        <button className="tile chat wide" onClick={() => nav('/chat')}>
-          <span className="ico">💬</span>
-          <div><strong>Hablar con alguien</strong><br /><span>Escríbele a tu psicólogo o tutor</span></div>
+        <button className="tile chat" onClick={() => nav('/seguimiento')}>
+          <span className="ico">📋</span><strong>Seguimiento</strong><span>Tu reporte, diagnóstico y citas</span>
+        </button>
+        <button className="tile rose" onClick={() => nav('/urgente')}>
+          <span className="ico">🚨</span><strong>Algo urgente</strong><span>Si te sientes en riesgo</span>
         </button>
       </div>
       <button className="link" onClick={signOut}>Cerrar sesión</button>

@@ -26,6 +26,9 @@ Agrega `icon-192.png` e `icon-512.png` en `/public`.
 ## Módulo 2
 Ejecuta `supabase/migration_02.sql` en el SQL Editor (crea el bucket `evidencias` y el escalado de casos).
 
+## Módulo 3
+Ejecuta `supabase/migration_03.sql` y marca a tu psicólogo con `staff_kind = 'psicologo'` (ver el final del archivo).
+
 ## Estado
 Listo: login, consentimiento, check-in, alerta con evidencias, seguimiento, chat, mascota y panel con resumen, casos y mensajes.
 Siguiente: recordatorios, consentimiento de padres, más gráficos.

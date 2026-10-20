@@ -5,7 +5,8 @@ import Consent from './pages/Consent.jsx'
 import StudentHome from './pages/StudentHome.jsx'
 import CheckIn from './pages/CheckIn.jsx'
 import Help from './pages/Help.jsx'
-import Chat from './pages/Chat.jsx'
+import Urgent from './pages/Urgent.jsx'
+import Follow from './pages/Follow.jsx'
 import StaffHome from './pages/StaffHome.jsx'
 import Neutral from './pages/Neutral.jsx'
 import QuickExit from './components/QuickExit.jsx'
@@ -40,7 +41,8 @@ export default function App() {
         <Route path="/" element={<StudentHome />} />
         <Route path="/checkin" element={<CheckIn />} />
         <Route path="/ayuda" element={<Help />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/urgente" element={<Urgent />} />
+        <Route path="/seguimiento" element={<Follow />} />
         <Route path="/tareas" element={<Neutral />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
